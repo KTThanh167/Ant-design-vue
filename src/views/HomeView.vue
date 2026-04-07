@@ -86,7 +86,7 @@ const state = reactive({
   checked1: false,
 })
 // Notification
-type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'open'
+type NotificationType = 'success' | 'error'
 
 const openNotificationWithIcon = (type: NotificationType) => {
   let message = ''
@@ -105,7 +105,7 @@ const openNotificationWithIcon = (type: NotificationType) => {
 
 <template>
   <!-- FORM 1 -->
-  <div class="container">
+  <div class="container flex flex-col gap-5">
     <div class="pt-5">
       <a-form :model="formState" :label-col="labelCol" :wrapper-col="wrapperCol">
         <a-form-item>
@@ -151,10 +151,9 @@ const openNotificationWithIcon = (type: NotificationType) => {
         </a-form-item>
       </a-form>
     </div>
-  </div>
-  <!-- FORM 2 -->
-  <div class="container">
-    <div class="mt-10">
+
+    <!-- FORM 2 -->
+    <div>
       <a-form
         layout="inline"
         :model="formState2"
@@ -182,43 +181,31 @@ const openNotificationWithIcon = (type: NotificationType) => {
         </a-form-item>
       </a-form>
     </div>
-  </div>
-  <!-- DATE PICKER -->
-  <div class="container">
-    <div class="mt-10">
+    <!-- DATE PICKER -->
+    <div>
       <a-date-picker :status="dateStatus" v-model:value="dateValue" :format="dateFormatList" />
     </div>
-  </div>
-  <!-- RATE -->
-  <div class="container">
-    <div class="mt-10">
+    <!-- RATE -->
+    <div>
       <a-rate v-model:value="rateStar" allow-half />
     </div>
-  </div>
-  <!-- SLIDER -->
-  <div class="container">
-    <div class="icon-wrapper mt-10">
+    <!-- SLIDER -->
+    <div class="icon-wrapper">
       <frown-outlined :style="{ color: preColor }" />
       <a-slider v-model:value="sliderValue" :min="minSlider" :max="maxSlider" />
       <smile-outlined :style="{ color: nextColor }" />
     </div>
-  </div>
-  <!-- SWITCH -->
-  <div class="container">
-    <div class="mt-10">
+    <!-- SWITCH -->
+    <div>
       <a-switch v-model:checked="state.checked1" checked-children="Tắt" un-checked-children="Bật" />
     </div>
-  </div>
-  <!-- NOTIFICATION -->
-  <div class="container">
-    <div class="mt-10 flex gap-5">
+    <!-- NOTIFICATION -->
+    <div class="flex gap-5">
       <a-button @click="() => openNotificationWithIcon('success')">Theo dõi</a-button>
       <a-button @click="() => openNotificationWithIcon('error')">Bỏ theo dõi</a-button>
     </div>
-  </div>
-  <!-- FLOAT BUTTON -->
-  <div class="container">
-    <div class="mt-10">
+    <!-- FLOAT BUTTON -->
+    <div>
       <a-float-button-group trigger="click" type="primary" :style="{ right: '24px' }">
         <template #icon>
           <CustomerServiceOutlined />
