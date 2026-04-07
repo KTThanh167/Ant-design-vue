@@ -7,6 +7,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons-vue'
 import { notification } from 'ant-design-vue'
 import { CustomerServiceOutlined, CommentOutlined } from '@ant-design/icons-vue'
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons-vue'
 
 // Form 1
 interface FormState {
@@ -100,6 +101,18 @@ const openNotificationWithIcon = (type: NotificationType) => {
   notification[type]({
     message,
   })
+}
+// Progress
+const defaultPercent = ref<number>(0)
+
+const increase = () => {
+  const percent = defaultPercent.value + 10
+  defaultPercent.value = percent > 100 ? 100 : percent
+}
+
+const decline = () => {
+  const percent = defaultPercent.value - 10
+  defaultPercent.value = percent < 0 ? 0 : percent
 }
 </script>
 
@@ -228,6 +241,18 @@ const openNotificationWithIcon = (type: NotificationType) => {
           </template>
         </a-float-button>
       </a-float-button-group>
+    </div>
+    <!-- PROGRESS -->
+    <div class="flex gap-3 items-center">
+      <a-progress type="circle" :percent="defaultPercent" />
+      <a-button-group>
+        <a-button @click="decline">
+          <template #icon><minus-outlined /></template>
+        </a-button>
+        <a-button @click="increase">
+          <template #icon><plus-outlined /></template>
+        </a-button>
+      </a-button-group>
     </div>
   </div>
 </template>
